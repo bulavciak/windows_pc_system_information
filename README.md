@@ -1,7 +1,7 @@
 # windows_pc_system_information
 
 EN
-System Information Gatherer: A powershell script that collects and displays information about your computer's hardware and software.
+A powershell script that collects and displays information about your computer's hardware and software.
 
 This PowerShell script collects and displays detailed information about your computer's hardware and software, including the operating system, processor, memory, disk drives, installed programs, graphics card, network adapters, and motherboard.
 
