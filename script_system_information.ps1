@@ -1,4 +1,4 @@
-# Informácie o operačnom systéme
+# OS information - Informácie o operačnom systéme
 $osInfo = Get-CimInstance Win32_OperatingSystem
 Write-Host "Operačný systém: $($osInfo.Caption)"
 Write-Host "Verzia: $($osInfo.Version)"
@@ -8,7 +8,7 @@ Write-Host "Inštalovaný dátum: $($osInfo.InstallDate)"
 Write-Host "Systémový čas: $($osInfo.CurrentTimeZone)"
 Write-Host "Počet používateľských účtov: $($osInfo.NumberOfUsers)"
 
-# Informácie o procesore
+# CPU information - Informácie o procesore
 $cpuInfo = Get-CimInstance Win32_Processor
 Write-Host "`nProcesor:"
 foreach ($cpu in $cpuInfo) {
@@ -20,7 +20,7 @@ foreach ($cpu in $cpuInfo) {
     Write-Host "ID: $($cpu.DeviceID)"
 }
 
-# Informácie o pamäti
+# RAM information - Informácie o pamäti
 $memoryInfo = Get-CimInstance Win32_PhysicalMemory
 $totalMemory = [math]::round(($memoryInfo | Measure-Object -Property Capacity -Sum).Sum / 1GB, 2)
 Write-Host "`nCelková pamäť (RAM): $totalMemory GB"
@@ -28,7 +28,7 @@ foreach ($mem in $memoryInfo) {
     Write-Host "Výrobca: $($mem.Manufacturer), Kapacita: $([math]::round($mem.Capacity / 1GB, 2)) GB, Rýchlosť: $($mem.Speed) MHz"
 }
 
-# Informácie o diskoch
+# HDDs information - Informácie o diskoch
 $diskInfo = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3"
 Write-Host "`nDiskové jednotky:"
 foreach ($disk in $diskInfo) {
@@ -38,14 +38,14 @@ foreach ($disk in $diskInfo) {
     Write-Host "Typ: $($disk.FileSystem), Stav: $($disk.VolumeName)"
 }
 
-# Informácie o nainštalovaných programoch
+# Installed progs - Informácie o nainštalovaných programoch
 $installedPrograms = Get-CimInstance Win32_Product
 Write-Host "`nNainštalované programy:"
 foreach ($program in $installedPrograms) {
     Write-Host "$($program.Name) - Verzia: $($program.Version) - Výrobca: $($program.Vendor)"
 }
 
-# Informácie o grafickej karte
+# GPU information - Informácie o grafickej karte
 $gpuInfo = Get-CimInstance Win32_VideoController
 Write-Host "`nGrafická karta:"
 foreach ($gpu in $gpuInfo) {
@@ -56,7 +56,7 @@ foreach ($gpu in $gpuInfo) {
     Write-Host "Verzia ovládača: $($gpu.DriverVersion)"
 }
 
-# Informácie o sieťových adaptérov
+# Network adapter information - Informácie o sieťových adaptérov
 $networkAdapters = Get-CimInstance Win32_NetworkAdapter | Where-Object { $_.PhysicalAdapter -eq $true }
 Write-Host "`nSieťové adaptéry:"
 foreach ($adapter in $networkAdapters) {
@@ -66,7 +66,7 @@ foreach ($adapter in $networkAdapters) {
     Write-Host "Stav: $($adapter.NetConnectionStatus)"
 }
 
-# Informácie o základnej doske
+# MB information - Informácie o základnej doske
 $motherboardInfo = Get-CimInstance Win32_BaseBoard
 Write-Host "`nZákladná doska:"
 Write-Host "Názov: $($motherboardInfo.Product)"
